@@ -1,7 +1,4 @@
 /** multiThreadProgram.c
- * Author: Masoud Zare
- * Student id: 201932662
- * assignment 6
  * this code uses two threads concurrently to get user input and at the same time calculate
  * the sum of numbers input by user, we need to use mutex locks and semaphores to manage this situation 
  * as we first need to get user input in order to be able to calculate the sum.
@@ -58,8 +55,9 @@ void *inputGetter(void *arg){
     pthread_mutex_unlock(&mutex);
     sem_post(&fullBuffer);/*releasing the lock for sum to be calculated*/         
 }
+
 void *mySum(void *arg){    
    sem_wait(&fullBuffer); /*acquiring the lock*/  
    sum+=userInput; 
    sem_post(&emptyBuffer);/*releasing the lock for userInput to be scanned*/   
-  }                
+}                
